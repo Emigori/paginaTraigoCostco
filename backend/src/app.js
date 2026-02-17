@@ -1,17 +1,18 @@
 import express from "express";
 import cors from "cors";
+import { notFound, errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
-// Permite que el frontend le pueda pegar a tu backend (luego lo restringimos)
 app.use(cors());
-
-// Permite recibir JSON en requests (POST/PUT futuro)
 app.use(express.json());
 
-// Ruta de prueba: “¿está vivo el backend?”
 app.get("/api/health", (req, res) => {
   res.json({ ok: true });
 });
+
+// 404 y errores al final
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
