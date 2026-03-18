@@ -9,3 +9,5 @@ await connectDB();
 app.listen(PORT, () => {
   console.log(`API running on http://localhost:${PORT}`);
 });
+
+import { Product } from "./models/Product.js";
