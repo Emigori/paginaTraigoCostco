@@ -6,7 +6,7 @@ export const listProducts = async (req, res, next) => {
     const search = req.query.search ?? null;
 
     const page = Math.max(1, parseInt(req.query.page ?? "1", 10));
-    const limit = Math.min(50, Math.max(1, parseInt(req.query.limit ?? "24", 10)));
+    const limit = Math.min(500, Math.max(1, parseInt(req.query.limit ?? "24", 10)));
 
     const filter = { isActive: true };
     if (category) filter.category = category;

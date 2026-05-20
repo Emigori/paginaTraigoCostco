@@ -10,3 +10,14 @@ frontend/dist/
 npm-debug.log*
 .vscode/
 
+# Archivos del scraper / herramientas locales
+apply-mapping.mjs
+fix-images.mjs
+fix-images-v2.mjs
+generate-matcher.mjs
+image-mapping.json
+matcher.html
+data/
+ws_endpoint.txt
+backend/src/scripts/
+
