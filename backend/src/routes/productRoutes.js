@@ -1,8 +1,22 @@
 import { Router } from "express";
 import { CATEGORY_ENUM } from "../constants/categories.js";
 import { listProducts } from "../controllers/productController.js";
+import { Product } from "../models/Product.js";
 
 const router = Router();
+
+// Últimos 30 productos agregados (para sección Novedades)
+router.get("/novedades", async (req, res, next) => {
+  try {
+    const items = await Product.find({ isActive: true })
+      .sort({ createdAt: -1 })
+      .limit(30)
+      .lean();
+    res.json({ ok: true, data: { items } });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/", (req, res, next) => {
   const categoryRaw = req.query.category ?? null;
