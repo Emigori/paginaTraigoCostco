@@ -8,6 +8,7 @@ import {
   adminDeleteProduct,
   adminUploadImage,
   adminGetStats,
+  adminBatchCategory,
 } from "../controllers/adminController.js";
 
 const upload = multer({
@@ -25,6 +26,7 @@ const router = Router();
 router.use(adminAuth);
 
 router.get("/stats", adminGetStats);
+router.post("/products/batch-category", adminBatchCategory);
 router.get("/products", adminListProducts);
 router.post("/products", adminCreateProduct);
 router.put("/products/:id", adminUpdateProduct);

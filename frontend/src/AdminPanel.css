@@ -70,6 +70,22 @@
   white-space: nowrap;
 }
 .adm-btn-add:hover { background: #15803d; }
+.adm-btn-cat {
+  background: #1e40af;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s;
+  display: inline-flex;
+  align-items: center;
+}
+.adm-btn-cat:hover { background: #1d4ed8; }
 .adm-search {
   flex: 1;
   min-width: 180px;

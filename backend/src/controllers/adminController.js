@@ -142,6 +142,28 @@ export const adminUploadImage = async (req, res, next) => {
   }
 };
 
+// ── POST /api/admin/products/batch-category ──────────────────────────────────
+export const adminBatchCategory = async (req, res, next) => {
+  try {
+    const { updates } = req.body; // [{ id, category }, ...]
+    if (!Array.isArray(updates) || updates.length === 0) {
+      return res.status(400).json({ ok: false, error: "updates debe ser un array no vacío" });
+    }
+
+    const ops = updates.map(({ id, category }) => ({
+      updateOne: {
+        filter: { _id: id },
+        update: { $set: { category, isActive: category !== "sin_categorizar" } },
+      },
+    }));
+
+    const result = await Product.bulkWrite(ops);
+    res.json({ ok: true, data: { modified: result.modifiedCount } });
+  } catch (err) {
+    next(err);
+  }
+};
+
 // ── GET /api/admin/stats ─────────────────────────────────────────────────────
 export const adminGetStats = async (req, res, next) => {
   try {
