@@ -10,7 +10,10 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
   process.env.FRONTEND_URL, // URL de Vercel en producción
+  "https://traigocostco.com.mx",
+  "https://www.traigocostco.com.mx",
 ].filter(Boolean);
+
 
 app.use(cors({
   origin: (origin, callback) => {
