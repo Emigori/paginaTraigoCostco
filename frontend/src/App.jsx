@@ -39,6 +39,12 @@ const SLIDES = [
     detail: 'Pídelo y te lo traemos',
     bg: 'slide-dark',
   },
+  {
+    title: '¿Quieres pedir algo?',
+    sub: 'Toma captura de pantalla y mándala al grupo',
+    detail: 'Te contactamos para coordinar tu pedido 🛍️',
+    bg: 'slide-green',
+  },
 ]
 
 const CATEGORIES = [
