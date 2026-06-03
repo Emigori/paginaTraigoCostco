@@ -496,6 +496,26 @@
   font-weight: 500;
   color: #e67e00;
 }
+.lightbox-hint {
+  font-size: 15px;
+  color: #555;
+  padding: 0 20px 12px;
+  margin: 0;
+}
+.lightbox-wa-btn {
+  display: block;
+  margin: 0 20px 20px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+}
+.lightbox-wa-btn:hover { background: #1ebe5d; }
 
 /* ══════════════════════════════
    WHATSAPP FLOTANTE

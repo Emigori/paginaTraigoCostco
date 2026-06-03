@@ -22,6 +22,12 @@ function cloudinaryUrl(url, size = 'card') {
 
 const SLIDES = [
   {
+    title: '¿Quieres pedir algo?',
+    sub: 'Esta página es solo un catálogo',
+    detail: 'Toma captura de pantalla y mándala al grupo 📷',
+    bg: 'slide-green',
+  },
+  {
     title: 'Productos Costco',
     sub: 'Directo a Ciudad Guzmán',
     detail: 'Solo $40 por artículo',
@@ -38,12 +44,6 @@ const SLIDES = [
     sub: 'Ropa, despensa, farmacia y más',
     detail: 'Pídelo y te lo traemos',
     bg: 'slide-dark',
-  },
-  {
-    title: '¿Quieres pedir algo?',
-    sub: 'Toma captura de pantalla y mándala al grupo',
-    detail: 'Te contactamos para coordinar tu pedido 🛍️',
-    bg: 'slide-green',
   },
 ]
 
@@ -315,6 +315,10 @@ export default function App() {
             <p className="lightbox-price">
               ${lightbox.price.toLocaleString('es-MX')} <span>+ $40 servicio</span>
             </p>
+            <p className="lightbox-hint">📷 Toma una captura y mándala al grupo</p>
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="lightbox-wa-btn">
+              📱 Ir al grupo de WhatsApp
+            </a>
           </div>
         </div>
       )}
