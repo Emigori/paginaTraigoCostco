@@ -261,6 +261,25 @@
 
 .empty { text-align: center; padding: 60px 0; }
 .empty p { font-size: 20px; color: #666; margin-bottom: 16px; }
+.maintenance {
+  text-align: center;
+  padding: 60px 24px;
+}
+.maintenance-icon { font-size: 52px; margin: 0 0 12px; }
+.maintenance-title { font-size: 22px; font-weight: 700; color: #1a1a2e; margin: 0 0 10px; }
+.maintenance-sub { font-size: 15px; color: #666; margin: 0 0 24px; max-width: 340px; margin-inline: auto; }
+.maintenance-btn {
+  display: inline-block;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.maintenance-btn:hover { background: #1ebe5d; }
 .reset-btn {
   font-size: 17px;
   padding: 12px 24px;

@@ -86,6 +86,7 @@ export default function App() {
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [loadingMore, setLoadingMore] = useState(false)
+  const [apiError, setApiError] = useState(false)
   const [lightbox, setLightbox] = useState(null)
   const timerRef = useRef(null)
 
@@ -125,13 +126,18 @@ export default function App() {
         url = `${API}/api/products?${params}`
       }
       const res = await fetch(url)
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json = await res.json()
       const items = json.data.items
+      setApiError(false)
       setProducts(prev => append ? [...prev, ...items] : items)
       if (json.data.meta) setTotal(json.data.meta.total)
       else setTotal(items.length)
     } catch {
-      if (!append) setProducts([])
+      if (!append) {
+        setApiError(true)
+        setProducts([])
+      }
     } finally {
       setLoading(false)
       setLoadingMore(false)
@@ -259,7 +265,18 @@ export default function App() {
           </div>
         )}
 
-        {!loading && products.length === 0 && (
+        {!loading && apiError && (
+          <div className="maintenance">
+            <p className="maintenance-icon">🔧</p>
+            <p className="maintenance-title">Estamos en mantenimiento</p>
+            <p className="maintenance-sub">Vuelve en unos minutos. Mientras tanto puedes ver los productos en el grupo de WhatsApp.</p>
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="maintenance-btn">
+              📱 Ir al grupo de WhatsApp
+            </a>
+          </div>
+        )}
+
+        {!loading && !apiError && products.length === 0 && (
           <div className="empty">
             <p>😕 No encontramos productos.</p>
             <button className="reset-btn" onClick={() => { setSearch(''); setCategory('') }}>

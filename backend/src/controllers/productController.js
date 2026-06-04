@@ -10,7 +10,7 @@ export const listProducts = async (req, res, next) => {
 
     const filter = { isActive: true };
     if (category) filter.category = category;
-    if (search) filter.name = { $regex: search, $options: 'i' };
+    if (search) filter.name = { $regex: search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $options: 'i' };
 
     const [items, total] = await Promise.all([
       Product.find(filter)
