@@ -470,7 +470,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 42%;
-  opacity: 0.18;
+  opacity: 0.30;
   pointer-events: none;
   user-select: none;
   object-fit: contain;
