@@ -275,6 +275,7 @@ export default function App() {
                 <div key={p._id} className="card">
                   <div className="card-img-wrap" onClick={() => setLightbox(p)}>
                     <img src={cloudinaryUrl(p.imageUrl, 'card')} alt={p.name} loading="lazy" />
+                    <img src={logo} className="card-watermark" alt="" aria-hidden="true" />
                     <span className="zoom-hint">🔍 Ver grande</span>
                     {isNew(p) && <span className="badge-nuevo">NUEVO</span>}
                   </div>
@@ -310,7 +311,10 @@ export default function App() {
         <div className="lightbox" onClick={() => setLightbox(null)}>
           <div className="lightbox-inner" onClick={e => e.stopPropagation()}>
             <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
-            <img src={cloudinaryUrl(lightbox.imageUrl, 'lightbox')} alt={lightbox.name} />
+            <div className="lightbox-img-wrap">
+              <img src={cloudinaryUrl(lightbox.imageUrl, 'lightbox')} alt={lightbox.name} className="lightbox-product-img" />
+              <img src={logo} className="lightbox-watermark" alt="" aria-hidden="true" />
+            </div>
             <p className="lightbox-name">{lightbox.name}</p>
             <p className="lightbox-price">
               ${lightbox.price.toLocaleString('es-MX')} <span>+ $40 servicio</span>
