@@ -23,6 +23,7 @@ export default function AdminPanel({ adminSecret }) {
   const [products, setProducts]     = useState([])
   const [stats, setStats]           = useState(null)
   const [loading, setLoading]       = useState(false)
+  const [fetchError, setFetchError] = useState('')
   const [search, setSearch]         = useState('')
   const [filterCat, setFilterCat]   = useState('')
   const [page, setPage]             = useState(1)
@@ -52,16 +53,19 @@ export default function AdminPanel({ adminSecret }) {
   // ── Fetch ──────────────────────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
     setLoading(true)
+    setFetchError('')
     const params = new URLSearchParams({ page, limit: LIMIT })
     if (filterCat) params.set('category', filterCat)
     if (search.length >= 2) params.set('search', search)
     try {
       const res = await fetch(`${API}/api/admin/products?${params}`, { headers })
       const json = await res.json()
+      if (!res.ok) throw new Error(json.error || `Error ${res.status}`)
       setProducts(json.data.items)
       setTotalItems(json.data.meta.total)
-    } catch {
+    } catch (err) {
       setProducts([])
+      setFetchError(err.message)
     } finally {
       setLoading(false)
     }
@@ -273,6 +277,8 @@ export default function AdminPanel({ adminSecret }) {
       <div className="adm-table-wrap">
         {loading ? (
           <p className="adm-status">Cargando...</p>
+        ) : fetchError ? (
+          <p className="adm-status" style={{color:'#c0392b'}}>⚠️ Error: {fetchError}</p>
         ) : products.length === 0 ? (
           <p className="adm-status">No hay productos.</p>
         ) : (
