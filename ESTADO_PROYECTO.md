@@ -4,16 +4,15 @@
 Página web para el grupo de ventas TraigoCostco: se traen productos de Costco Guadalajara a Ciudad Guzmán. Se cobran $40 por artículo. El grupo de WhatsApp tiene más de 1,000 personas.
 
 ## URLs
-- **Página pública**: https://pagina-traigo-costco.vercel.app (funciona ahorita)
-- **Dominio comprado**: traigocostco.com.mx (pendiente de conectar DNS, ver abajo)
-- **Panel de admin**: https://pagina-traigo-costco.vercel.app/tcadmin7k2m
+- **Página pública**: https://traigocostco.com.mx
 - **Backend API**: https://paginatraigocostco-production.up.railway.app
+- **Panel de admin**: URL secreta — ver variable ADMIN_SECRET en Railway
 
 ## Estado actual ✅
 - Página desplegada en Vercel (frontend)
 - Backend desplegado en Railway (Express + MongoDB Atlas)
 - Imágenes en Cloudinary
-- Panel de admin funcionando (URL secreta: `/tcadmin7k2m`)
+- Panel de admin funcionando (URL secreta en Railway → ADMIN_SECRET)
 - Sección Novedades (últimos 30 productos) + badge NUEVO en productos recientes
 - Dominio `traigocostco.com.mx` comprado en GoDaddy
 
@@ -42,10 +41,7 @@ Hay que agregar 2 registros DNS en GoDaddy (cuenta suspendida temporalmente):
 - **Repo**: github.com/Emigori/paginaTraigoCostco
 
 ## Credenciales importantes
-- Admin URL secreta: `/tcadmin7k2m`
-- ADMIN_SECRET: `tcadmin7k2m`
-- MongoDB: `mongodb+srv://tc_dev:TcDev2026@traigocostco.1uo0ds8.mongodb.net/`
-- Cloudinary cloud: `dboqjes1u`
+Las credenciales están en las variables de entorno de Railway y Vercel. No se guardan en el repo.
 
 ## Archivos clave
 ```
@@ -69,18 +65,17 @@ paginaTraigoCostco/
 
 ### Railway (backend)
 ```
-MONGO_URI=mongodb+srv://tc_dev:TcDev2026@traigocostco.1uo0ds8.mongodb.net/?appName=TraigoCostco
-ADMIN_SECRET=tcadmin7k2m
-CLOUDINARY_CLOUD_NAME=dboqjes1u
-CLOUDINARY_API_KEY=617396384311981
-CLOUDINARY_API_SECRET=wmo600zA0QhXdNlqlD4pCXpyICk
-FRONTEND_URL=https://pagina-traigo-costco.vercel.app
+MONGO_URI=...
+ADMIN_SECRET=...
+CLOUDINARY_CLOUD_NAME=...
+CLOUDINARY_API_KEY=...
+CLOUDINARY_API_SECRET=...
+FRONTEND_URL=...
 ```
 
 ### Vercel (frontend)
 ```
-VITE_API_URL=https://paginatraigocostco-production.up.railway.app
-VITE_ADMIN_SECRET=tcadmin7k2m
+VITE_API_URL=...
 ```
 
 ## Flujo para agregar nueva categoría (scraper)
