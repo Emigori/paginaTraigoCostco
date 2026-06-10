@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import logo from './assets/logo.png'
 import './App.css'
 
-const WHATSAPP_URL = 'https://chat.whatsapp.com/Cxn6xVBMHDSBhd7S0gcTmW?mode=gi_t'
+
 const API = import.meta.env.VITE_API_URL ?? ''
 
 /**
@@ -35,7 +35,7 @@ const SLIDES = [
   },
   {
     title: '¡Más de 1,000 clientes!',
-    sub: 'Únete al grupo de WhatsApp',
+    sub: 'Más de 1,000 clientes satisfechos',
     detail: 'Nuevos productos cada semana',
     bg: 'slide-blue',
   },
@@ -167,9 +167,6 @@ export default function App() {
       {/* ── Navbar ── */}
       <nav className="navbar">
         <img src={logo} alt="TraigoCostco" className="nav-logo" />
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="nav-wa">
-          <span>📱</span> Unirse al grupo
-        </a>
       </nav>
 
       {/* ── Slider ── */}
@@ -182,9 +179,6 @@ export default function App() {
                 <h2>{s.title}</h2>
                 <p className="slide-sub">{s.sub}</p>
                 <p className="slide-detail">{s.detail}</p>
-                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="slide-btn">
-                  📱 Unirme al grupo de WhatsApp
-                </a>
               </div>
             </div>
           </div>
@@ -246,7 +240,7 @@ export default function App() {
             <div className="notice-text">
               <strong>Esta sección cambia seguido</strong> — ropa y artículos para el hogar son los productos que más rotan, por lo que no siempre hay gran variedad aquí.
               <br />
-              Si quieres ver las novedades al momento, <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">únete al grupo de WhatsApp</a> donde se publican primero. 📱
+              Si quieres ver las novedades al momento, revisa esta página seguido — los productos nuevos aparecen aquí primero. 📱
             </div>
           </div>
         )}
@@ -269,10 +263,7 @@ export default function App() {
           <div className="maintenance">
             <p className="maintenance-icon">🔧</p>
             <p className="maintenance-title">Estamos en mantenimiento</p>
-            <p className="maintenance-sub">Vuelve en unos minutos. Mientras tanto puedes ver los productos en el grupo de WhatsApp.</p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="maintenance-btn">
-              📱 Ir al grupo de WhatsApp
-            </a>
+            <p className="maintenance-sub">Vuelve en unos minutos.</p>
           </div>
         )}
 
@@ -318,12 +309,7 @@ export default function App() {
         )}
       </main>
 
-      {/* ── WhatsApp flotante ── */}
-      <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="wa-float">
-        📱
-      </a>
-
-      {/* ── Lightbox ── */}
+{/* ── Lightbox ── */}
       {lightbox && (
         <div className="lightbox" onClick={() => setLightbox(null)}>
           <div className="lightbox-inner" onClick={e => e.stopPropagation()}>
@@ -336,10 +322,7 @@ export default function App() {
             <p className="lightbox-price">
               ${lightbox.price.toLocaleString('es-MX')} <span>+ $40 servicio</span>
             </p>
-            <p className="lightbox-hint">📷 Toma una captura y mándala al grupo</p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="lightbox-wa-btn">
-              📱 Ir al grupo de WhatsApp
-            </a>
+            <p className="lightbox-hint">📷 Toma una captura para hacer tu pedido</p>
           </div>
         </div>
       )}
@@ -347,7 +330,6 @@ export default function App() {
       <footer className="footer">
         <img src={logo} alt="TraigoCostco" className="footer-logo" />
         <p>Ciudad Guzmán · Precios Costco Guadalajara + $40 por artículo</p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">📱 Unirme al grupo</a>
       </footer>
 
     </div>
