@@ -259,7 +259,7 @@ export default function AdminPanel({ adminSecret }) {
       {/* ── Barra de herramientas ── */}
       <div className="adm-toolbar">
         <button className="adm-btn-add" onClick={openCreate}>＋ Agregar producto</button>
-        <a href={`/${import.meta.env.VITE_ADMIN_SECRET}/categorizar`} className="adm-btn-cat">📦 Categorizar nuevos</a>
+        <a href={`/${adminSecret}/categorizar`} className="adm-btn-cat">📦 Categorizar nuevos</a>
         <input
           className="adm-search"
           type="search"

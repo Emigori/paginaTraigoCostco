@@ -95,7 +95,7 @@ export default function CategoryMatcher({ adminSecret }) {
 
       {/* ── Header ── */}
       <header className="cm-header">
-        <a href="/tcadmin7k2m" className="cm-back">← Admin</a>
+        <a href={`/${adminSecret}`} className="cm-back">← Admin</a>
         <h1 className="cm-title">📦 Categorizar productos</h1>
         <div className="cm-count">
           {loading ? '...' : `${products.length} sin categorizar`}
@@ -144,7 +144,7 @@ export default function CategoryMatcher({ adminSecret }) {
       ) : products.length === 0 ? (
         <div className="cm-empty">
           <p>🎉 ¡No hay productos sin categorizar!</p>
-          <a href="/tcadmin7k2m" className="cm-empty-link">Volver al panel</a>
+          <a href={`/${adminSecret}`} className="cm-empty-link">Volver al panel</a>
         </div>
       ) : (
         <div className="cm-grid">
