@@ -35,9 +35,18 @@ export default function CategoryMatcher({ adminSecret }) {
   const fetchUncategorized = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await fetch(`${API}/api/admin/products?category=sin_categorizar&limit=100`, { headers })
-      const json = await res.json()
-      setProducts(json.data.items)
+      let all = []
+      let page = 1
+      const limit = 100
+      while (true) {
+        const res = await fetch(`${API}/api/admin/products?category=sin_categorizar&limit=${limit}&page=${page}`, { headers })
+        const json = await res.json()
+        const items = json.data.items
+        all = all.concat(items)
+        if (items.length < limit) break
+        page += 1
+      }
+      setProducts(all)
     } catch { setProducts([]) }
     finally { setLoading(false) }
   }, [adminSecret])
