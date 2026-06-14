@@ -88,6 +88,7 @@ export default function App() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [apiError, setApiError] = useState(false)
   const [lightbox, setLightbox] = useState(null)
+  const [copied, setCopied] = useState(false)
   const timerRef = useRef(null)
 
   const debouncedSearch = useDebounce(search)
@@ -160,6 +161,28 @@ export default function App() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  // Reset "copiado" cuando se abre/cierra el lightbox
+  useEffect(() => { setCopied(false) }, [lightbox])
+
+  const handleCopyOrder = async (product) => {
+    const text = `Emiliano yo quiero "${product.name}" en "${product.price}"`
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch {
+      // Fallback para navegadores/contexto sin permiso de clipboard
+      const ta = document.createElement('textarea')
+      ta.value = text
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      try { document.execCommand('copy') } catch {}
+      document.body.removeChild(ta)
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 4000)
+  }
 
   return (
     <div className="page">
@@ -323,6 +346,16 @@ export default function App() {
               ${lightbox.price.toLocaleString('es-MX')} <span>+ $40 servicio</span>
             </p>
             <p className="lightbox-hint">📷 Toma una captura para hacer tu pedido</p>
+
+            <button className="lightbox-copy-btn" onClick={() => handleCopyOrder(lightbox)}>
+              📋 Copiar pedido
+            </button>
+
+            {copied && (
+              <p className="lightbox-copied-msg">
+                ✅ Ya se copió el texto en tu portapapeles, ve y pégalo en el chat grupal
+              </p>
+            )}
           </div>
         </div>
       )}

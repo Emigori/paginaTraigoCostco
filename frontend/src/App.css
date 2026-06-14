@@ -540,6 +540,34 @@
   padding: 0 20px 12px;
   margin: 0;
 }
+.lightbox-copy-btn {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 0 20px 12px;
+  background: #1a73e8;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+}
+.lightbox-copy-btn:hover { background: #1558b0; }
+
+.lightbox-copied-msg {
+  background: #dcfce7;
+  color: #166534;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 14px;
+  margin: 0 20px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 .lightbox-wa-btn {
   display: block;
   margin: 0 20px 20px;
