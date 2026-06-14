@@ -4,6 +4,7 @@ import './AdminPanel.css'
 const CATEGORIES = [
   { key: 'despensa', label: 'Despensa' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes y Quesos' },
+  { key: 'refrigeracion', label: 'Refrigeración' },
   { key: 'bebidas_te', label: 'Bebidas y Té' },
   { key: 'dulces', label: 'Dulces' },
   { key: 'limpieza', label: 'Limpieza' },

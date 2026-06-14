@@ -82,7 +82,7 @@ Grupo de ventas **TraigoCostco**: se traen productos de Costco Guadalajara a Ciu
 - `GET /api/products/categories`
 
 ## Categorías
-`ropa`, `farmacia`, `despensa`, `carnes_quesos_salchichas`, `limpieza`, `casa`, `bebidas_te`, `dulces`
+`ropa`, `farmacia`, `despensa`, `carnes_quesos_salchichas`, `limpieza`, `casa`, `bebidas_te`, `dulces`, `refrigeracion`
 
 ## Modelo Product
 `productId` (unique), `name`, `price`, `category` (enum), `imageUrl`, `imagePublicId`, `isActive`, `timestamps`
