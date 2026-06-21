@@ -311,6 +311,7 @@ export default function App() {
                     <img src={logo} className="card-watermark" alt="" aria-hidden="true" />
                     <span className="zoom-hint">🔍 Ver grande</span>
                     {isNew(p) && <span className="badge-nuevo">NUEVO</span>}
+                    {p.category === 'ofertas' && <span className="badge-oferta">🔥 OFERTA</span>}
                   </div>
                   <div className="card-body">
                     <p className="card-name">{p.name}</p>
