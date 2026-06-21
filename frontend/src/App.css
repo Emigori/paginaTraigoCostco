@@ -238,6 +238,29 @@
 }
 .cat-tile.active .cat-label { color: #fff; }
 
+/* ── Ofertas: botón especial con fuego ── */
+@keyframes fire-pulse {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(255, 100, 0, 0.5); }
+  50%       { box-shadow: 0 0 18px 6px rgba(255, 60, 0, 0.8); }
+}
+.cat-tile--ofertas {
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  border-color: #ff6a00;
+  animation: fire-pulse 2s ease-in-out infinite;
+}
+.cat-tile--ofertas .cat-label,
+.cat-tile--ofertas .cat-emoji { color: #fff; }
+.cat-tile--ofertas:hover {
+  background: linear-gradient(135deg, #ff8c00, #ff0055);
+  border-color: #ff8c00;
+  box-shadow: 0 4px 18px rgba(255, 80, 0, 0.5);
+}
+.cat-tile--ofertas.active {
+  background: linear-gradient(135deg, #ff3c00, #c0003a);
+  border-color: #ff3c00;
+  animation: none;
+}
+
 .cat-emoji { font-size: 30px; line-height: 1; }
 .cat-label {
   font-size: 12px;
