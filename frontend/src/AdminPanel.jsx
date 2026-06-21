@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import './AdminPanel.css'
 
 const CATEGORIES = [
+  { key: 'ofertas', label: 'Ofertas 🔥' },
   { key: 'despensa', label: 'Despensa' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes y Quesos' },
   { key: 'refrigeracion', label: 'Refrigeración' },

@@ -8,6 +8,7 @@ export const CATEGORY_ENUM = [
   "bebidas_te",
   "dulces",
   "refrigeracion",
+  "ofertas",
   "sin_categorizar",
 ];
 
@@ -21,5 +22,6 @@ export const CATEGORY_LABELS = {
   bebidas_te: "Bebidas y Té",
   dulces: "Dulces",
   refrigeracion: "Refrigeración",
+  ofertas: "Ofertas",
   sin_categorizar: "Sin categorizar",
 };

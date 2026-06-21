@@ -50,6 +50,7 @@ const SLIDES = [
 const CATEGORIES = [
   { key: '', label: 'Ver todo', emoji: '🛒' },
   { key: 'novedades', label: 'Novedades', emoji: '🆕' },
+  { key: 'ofertas', label: 'Ofertas', emoji: '🔥' },
   { key: 'despensa', label: 'Despensa', emoji: '🥫' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes y Quesos', emoji: '🥩' },
   { key: 'refrigeracion', label: 'Refrigeración', emoji: '🧊' },

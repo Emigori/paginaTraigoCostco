@@ -4,6 +4,7 @@ import './CategoryMatcher.css'
 const API = import.meta.env.VITE_API_URL ?? ''
 
 const CATS = [
+  { key: 'ofertas',                label: 'Ofertas',         emoji: '🔥' },
   { key: 'despensa',               label: 'Despensa',       emoji: '🥫' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes',        emoji: '🥩' },
   { key: 'refrigeracion',          label: 'Refrigeración',   emoji: '🧊' },
