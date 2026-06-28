@@ -28,7 +28,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json({ limit: "10kb" }));
+app.use(express.json({ limit: "1mb" }));
 
 // ── Rate limiting: endpoints públicos (100 req / 15 min por IP)
 const publicLimiter = rateLimit({
