@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import './CategoryMatcher.css'
 
-const API = import.meta.env.VITE_API_URL ?? ''
-
 const CATS = [
   { key: 'ofertas',                label: 'Ofertas',         emoji: '🔥' },
   { key: 'despensa',               label: 'Despensa',       emoji: '🥫' },
@@ -21,7 +19,34 @@ function cloudinaryThumb(url) {
   return url.replace('/upload/', '/upload/f_auto,q_auto,w_300,h_300,c_fill/')
 }
 
+// ── Wrapper de autenticación ──────────────────────────────────────────────────
 export default function CategoryMatcher({ adminSecret }) {
+  const [authStatus, setAuthStatus] = useState('checking')
+  const API = import.meta.env.VITE_API_URL ?? ''
+
+  useEffect(() => {
+    if (!adminSecret || adminSecret.length < 8) { setAuthStatus('denied'); return }
+    fetch(`${API}/api/admin/stats`, { headers: { 'x-admin-key': adminSecret } })
+      .then(r => setAuthStatus(r.ok ? 'ok' : 'denied'))
+      .catch(() => setAuthStatus('denied'))
+  }, [adminSecret])
+
+  if (authStatus === 'checking') {
+    return <div style={{ display:'flex', alignItems:'center', justifyContent:'center', height:'100vh', fontFamily:'Arial', color:'#555' }}>Verificando acceso...</div>
+  }
+  if (authStatus === 'denied') {
+    return (
+      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100vh', fontFamily:'Arial', gap:'12px' }}>
+        <span style={{ fontSize:'3rem' }}>⛔</span>
+        <h2 style={{ color:'#c0392b', margin:0 }}>Acceso no autorizado</h2>
+        <a href="/" style={{ color:'#3498db' }}>← Volver a la tienda</a>
+      </div>
+    )
+  }
+  return <CategoryMatcherContent adminSecret={adminSecret} API={API} />
+}
+
+function CategoryMatcherContent({ adminSecret, API }) {
   const headers = { 'x-admin-key': adminSecret }
 
   const [products, setProducts]     = useState([])

@@ -21,7 +21,45 @@ function cloudinaryThumb(url) {
   return url.replace('/upload/', '/upload/f_auto,q_auto,w_80,h_80,c_fill/')
 }
 
+// ── Wrapper de autenticación ──────────────────────────────────────────────────
 export default function AdminPanel({ adminSecret }) {
+  const [authStatus, setAuthStatus] = useState('checking') // 'checking' | 'ok' | 'denied'
+  const API = import.meta.env.VITE_API_URL ?? ''
+
+  useEffect(() => {
+    if (!adminSecret || adminSecret.length < 8) {
+      setAuthStatus('denied')
+      return
+    }
+    fetch(`${API}/api/admin/stats`, {
+      headers: { 'x-admin-key': adminSecret }
+    }).then(r => setAuthStatus(r.ok ? 'ok' : 'denied'))
+      .catch(() => setAuthStatus('denied'))
+  }, [adminSecret])
+
+  if (authStatus === 'checking') {
+    return (
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', height:'100vh', fontFamily:'Arial', color:'#555' }}>
+        Verificando acceso...
+      </div>
+    )
+  }
+
+  if (authStatus === 'denied') {
+    return (
+      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100vh', fontFamily:'Arial', gap:'12px' }}>
+        <span style={{ fontSize:'3rem' }}>⛔</span>
+        <h2 style={{ color:'#c0392b', margin:0 }}>Acceso no autorizado</h2>
+        <a href="/" style={{ color:'#3498db' }}>← Volver a la tienda</a>
+      </div>
+    )
+  }
+
+  return <AdminPanelContent adminSecret={adminSecret} API={API} />
+}
+
+// ── Panel completo (solo se monta si authStatus === 'ok') ─────────────────────
+function AdminPanelContent({ adminSecret, API }) {
   const [products, setProducts]     = useState([])
   const [stats, setStats]           = useState(null)
   const [loading, setLoading]       = useState(false)
@@ -49,7 +87,6 @@ export default function AdminPanel({ adminSecret }) {
   const [imgFile, setImgFile]       = useState(null)
   const [imgPreview, setImgPreview] = useState(null)
 
-  const API = import.meta.env.VITE_API_URL ?? ''
   const headers = { 'x-admin-key': adminSecret }
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
