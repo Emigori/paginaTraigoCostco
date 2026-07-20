@@ -87,6 +87,10 @@ function AdminPanelContent({ adminSecret, API }) {
   const [imgFile, setImgFile]       = useState(null)
   const [imgPreview, setImgPreview] = useState(null)
 
+  // Selección múltiple
+  const [selected, setSelected]     = useState(new Set())
+  const [bulkLoading, setBulkLoading] = useState(false)
+
   const headers = { 'x-admin-key': adminSecret }
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
@@ -238,6 +242,57 @@ function AdminPanelContent({ adminSecret, API }) {
     fetchStats()
   }
 
+  // ── Selección múltiple ────────────────────────────────────────────────────
+  const toggleSelect = (id) => {
+    setSelected(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const toggleSelectAll = () => {
+    if (selected.size === products.length) {
+      setSelected(new Set())
+    } else {
+      setSelected(new Set(products.map(p => p._id)))
+    }
+  }
+
+  const handleBulkDeactivate = async () => {
+    if (selected.size === 0) return
+    if (!confirm(`¿Desactivar ${selected.size} productos seleccionados?`)) return
+    setBulkLoading(true)
+    await Promise.all(
+      [...selected].map(id =>
+        fetch(`${API}/api/admin/products/${id}`, { method: 'DELETE', headers })
+      )
+    )
+    setSelected(new Set())
+    setBulkLoading(false)
+    fetchProducts()
+    fetchStats()
+  }
+
+  const handleBulkActivate = async () => {
+    if (selected.size === 0) return
+    if (!confirm(`¿Activar ${selected.size} productos seleccionados?`)) return
+    setBulkLoading(true)
+    await Promise.all(
+      [...selected].map(id =>
+        fetch(`${API}/api/admin/products/${id}`, {
+          method: 'PUT',
+          headers: { ...headers, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isActive: true })
+        })
+      )
+    )
+    setSelected(new Set())
+    setBulkLoading(false)
+    fetchProducts()
+    fetchStats()
+  }
+
   // ── Cambiar solo imagen ────────────────────────────────────────────────────
   const openImgModal = (p) => { setImgModal(p); setImgFile(null); setImgPreview(p.imageUrl) }
   const closeImgModal = () => { setImgModal(null); setImgFile(null); setImgPreview(null) }
@@ -299,6 +354,16 @@ function AdminPanelContent({ adminSecret, API }) {
       <div className="adm-toolbar">
         <button className="adm-btn-add" onClick={openCreate}>＋ Agregar producto</button>
         <a href={`/${adminSecret}/categorizar`} className="adm-btn-cat">📦 Categorizar nuevos</a>
+        {selected.size > 0 && (
+          <>
+            <button className="adm-btn-del" onClick={handleBulkDeactivate} disabled={bulkLoading}>
+              {bulkLoading ? 'Procesando...' : `🗑 Desactivar ${selected.size}`}
+            </button>
+            <button className="adm-btn-restore" onClick={handleBulkActivate} disabled={bulkLoading}>
+              {bulkLoading ? 'Procesando...' : `↩ Activar ${selected.size}`}
+            </button>
+          </>
+        )}
         <input
           className="adm-search"
           type="search"
@@ -324,6 +389,14 @@ function AdminPanelContent({ adminSecret, API }) {
           <table className="adm-table">
             <thead>
               <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={selected.size === products.length && products.length > 0}
+                    onChange={toggleSelectAll}
+                    title="Seleccionar todos"
+                  />
+                </th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Precio</th>
@@ -334,7 +407,14 @@ function AdminPanelContent({ adminSecret, API }) {
             </thead>
             <tbody>
               {products.map(p => (
-                <tr key={p._id} className={!p.isActive ? 'adm-row-inactive' : ''}>
+                <tr key={p._id} className={`${!p.isActive ? 'adm-row-inactive' : ''} ${selected.has(p._id) ? 'adm-row-selected' : ''}`}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selected.has(p._id)}
+                      onChange={() => toggleSelect(p._id)}
+                    />
+                  </td>
                   <td>
                     <img
                       src={cloudinaryThumb(p.imageUrl)}

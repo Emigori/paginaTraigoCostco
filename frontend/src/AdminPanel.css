@@ -138,6 +138,7 @@
 .adm-table tr:last-child td { border-bottom: none; }
 .adm-table tr:hover td { background: #f8fafc; }
 .adm-row-inactive td { opacity: .55; }
+.adm-row-selected td { background: #eff6ff !important; }
 
 .adm-thumb {
   width: 52px;
