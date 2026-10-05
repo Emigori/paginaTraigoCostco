@@ -54,6 +54,7 @@ const CATEGORIES = [
   { key: 'despensa', label: 'Despensa', emoji: '🥫' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes y Quesos', emoji: '🥩' },
   { key: 'refrigeracion', label: 'Refrigeración', emoji: '🧊' },
+  { key: 'pasteles', label: 'Pasteles', emoji: '🎂' },
   { key: 'bebidas_te', label: 'Bebidas y Té', emoji: '🥤' },
   { key: 'dulces', label: 'Dulces', emoji: '🍫' },
   { key: 'limpieza', label: 'Limpieza', emoji: '🧹' },

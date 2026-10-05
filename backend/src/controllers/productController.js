@@ -1,4 +1,5 @@
 import { Product } from "../models/Product.js";
+import { buildSearchFilters } from "../helpers/searchQuery.js";
 
 export const listProducts = async (req, res, next) => {
   try {
@@ -8,9 +9,16 @@ export const listProducts = async (req, res, next) => {
     const page = Math.max(1, parseInt(req.query.page ?? "1", 10));
     const limit = Math.min(500, Math.max(1, parseInt(req.query.limit ?? "24", 10)));
 
-    const filter = { isActive: true };
-    if (category) filter.category = category;
-    if (search) filter.name = { $regex: search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $options: 'i' };
+    const base = { isActive: true };
+    if (category) base.category = category;
+
+    const searchFilters = search ? buildSearchFilters(search) : null;
+    let filter = searchFilters ? { ...base, ...searchFilters.and } : base;
+
+    // Si buscar TODAS las palabras no da nada, se intenta con ALGUNA palabra
+    if (searchFilters?.or && (await Product.countDocuments(filter)) === 0) {
+      filter = { ...base, ...searchFilters.or };
+    }
 
     const [items, total] = await Promise.all([
       Product.find(filter)

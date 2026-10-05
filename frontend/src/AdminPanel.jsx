@@ -6,6 +6,7 @@ const CATEGORIES = [
   { key: 'despensa', label: 'Despensa' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes y Quesos' },
   { key: 'refrigeracion', label: 'Refrigeración' },
+  { key: 'pasteles', label: 'Pasteles 🎂' },
   { key: 'bebidas_te', label: 'Bebidas y Té' },
   { key: 'dulces', label: 'Dulces' },
   { key: 'limpieza', label: 'Limpieza' },

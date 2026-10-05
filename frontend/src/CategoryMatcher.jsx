@@ -6,6 +6,7 @@ const CATS = [
   { key: 'despensa',               label: 'Despensa',       emoji: '🥫' },
   { key: 'carnes_quesos_salchichas', label: 'Carnes',        emoji: '🥩' },
   { key: 'refrigeracion',          label: 'Refrigeración',   emoji: '🧊' },
+  { key: 'pasteles',               label: 'Pasteles',        emoji: '🎂' },
   { key: 'bebidas_te',             label: 'Bebidas',         emoji: '🥤' },
   { key: 'dulces',                 label: 'Dulces',          emoji: '🍫' },
   { key: 'limpieza',               label: 'Limpieza',        emoji: '🧹' },
