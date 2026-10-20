@@ -266,7 +266,7 @@ export default function App() {
           {CATEGORIES.map(c => (
             <button
               key={c.key}
-              className={`cat-tile ${category === c.key ? 'active' : ''} ${c.key === 'ofertas' ? 'cat-tile--ofertas' : ''}`}
+              className={`cat-tile ${category === c.key ? 'active' : ''}`}
               onClick={() => setCategory(c.key)}
             >
               <span className="cat-emoji">{c.emoji}</span>
